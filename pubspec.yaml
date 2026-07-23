@@ -1,0 +1,30 @@
+name: flutter_guardian
+description: >
+  The Lighthouse of Flutter — analyze performance, crashes, network, and UI,
+  then generate actionable health reports with scores and recommendations.
+version: 0.1.0
+homepage: https://github.com/github_career/flutter_guardian
+repository: https://github.com/github_career/flutter_guardian
+issue_tracker: https://github.com/github_career/flutter_guardian/issues
+topics:
+  - flutter
+  - monitoring
+  - performance
+  - debugging
+  - analytics
+
+environment:
+  sdk: ^3.6.2
+  flutter: ">=3.27.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  path: ^1.9.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
