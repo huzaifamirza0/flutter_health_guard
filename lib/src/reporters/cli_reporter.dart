@@ -9,7 +9,7 @@ class CliReporter {
 
     final lines = <String>[
       '',
-      'Flutter Guardian',
+      'Flutter Health Guard',
       '────────────────────────────',
       '',
       'Overall Score',

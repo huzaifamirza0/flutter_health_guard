@@ -1,7 +1,9 @@
 import 'events.dart';
 
+/// Severity for a [Recommendation].
 enum RecommendationSeverity { info, warning, critical }
 
+/// Actionable finding produced by the analyzer (rule-based, not LLM).
 class Recommendation {
   Recommendation({
     required this.id,
@@ -13,12 +15,25 @@ class Recommendation {
     this.fixes = const [],
   });
 
+  /// Stable id for the finding (useful for CI assertions).
   final String id;
+
+  /// Short headline shown in HTML / CLI.
   final String title;
+
+  /// Longer explanation.
   final String message;
+
+  /// How urgent the finding is.
   final RecommendationSeverity severity;
+
+  /// Bucket such as `ui`, `network`, `performance`, `stability`.
   final String category;
+
+  /// Optional estimated impact, e.g. `+8% FPS`.
   final String? estimatedImprovement;
+
+  /// Concrete fix suggestions.
   final List<String> fixes;
 
   Map<String, dynamic> toJson() => {
@@ -33,6 +48,7 @@ class Recommendation {
       };
 }
 
+/// A named category score (0–100).
 class CategoryScore {
   CategoryScore({
     required this.name,
@@ -51,6 +67,7 @@ class CategoryScore {
       };
 }
 
+/// Health scores for a session. Computed before any HTML/CLI rendering.
 class GuardianScores {
   GuardianScores({
     required this.overall,
@@ -63,8 +80,11 @@ class GuardianScores {
     this.security = 100,
   });
 
+  /// Weighted overall score (0–100).
   final int overall;
   final int performance;
+
+  /// Heuristic in v0.1 — not real heap/RSS.
   final int memory;
   final int network;
   final int stability;
@@ -72,6 +92,7 @@ class GuardianScores {
   final int architecture;
   final int security;
 
+  /// Convenience list for renderers.
   List<CategoryScore> get categories => [
         CategoryScore(name: 'Performance', score: performance),
         CategoryScore(name: 'Memory', score: memory),
@@ -95,7 +116,9 @@ class GuardianScores {
       };
 }
 
-/// Source-of-truth report model. HTML / CLI / future dashboard all render this.
+/// Source-of-truth report. HTML / CLI / future dashboard all render this.
+///
+/// Obtain via [Guardian.analyze] or by reading on-disk `report.json`.
 class GuardianReport {
   GuardianReport({
     required this.sessionId,
@@ -130,11 +153,15 @@ class GuardianReport {
   final FrameStats frameStats;
   final List<WidgetRebuildStat> widgets;
   final DeviceInfo? device;
+
+  /// Milliseconds from initialize to first frame, if measured.
   final int? startupTimeMs;
   final Map<String, dynamic> meta;
 
+  /// Wall-clock length of the monitored session.
   Duration get sessionDuration => endedAt.difference(startedAt);
 
+  /// JSON map matching the on-disk `report.json` schema.
   Map<String, dynamic> toJson() => {
         'version': '0.1.0',
         'sessionId': sessionId,

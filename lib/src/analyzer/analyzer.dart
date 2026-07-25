@@ -31,7 +31,7 @@ class GuardianAnalyzer {
       device: store.device,
       startupTimeMs: store.startupTimeMs,
       meta: {
-        'package': 'flutter_guardian',
+        'package': 'flutter_health_guard',
         'schemaVersion': '0.1.0',
       },
     );

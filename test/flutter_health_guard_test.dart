@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:flutter_guardian/flutter_guardian.dart';
-import 'package:flutter_guardian/src/analyzer/analyzer.dart';
-import 'package:flutter_guardian/src/analyzer/session_store.dart';
-import 'package:flutter_guardian/src/reporters/html_reporter.dart';
+import 'package:flutter_health_guard/flutter_health_guard.dart';
+import 'package:flutter_health_guard/src/analyzer/analyzer.dart';
+import 'package:flutter_health_guard/src/analyzer/session_store.dart';
+import 'package:flutter_health_guard/src/reporters/html_reporter.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -103,7 +103,7 @@ void main() {
       final report = GuardianAnalyzer().analyze(store);
       final html = HtmlReporter().render(report);
 
-      expect(html, contains('Flutter Guardian'));
+      expect(html, contains('Flutter Health Guard'));
       expect(html, contains('const REPORT ='));
       expect(html, contains(report.sessionId));
       expect(html, isNot(contains('</script></script>')));
