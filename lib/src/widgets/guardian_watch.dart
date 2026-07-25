@@ -3,7 +3,9 @@ import 'package:flutter/widgets.dart';
 
 import '../guardian.dart';
 
-/// Wrap widgets you want rebuild-tracked.
+/// Opt-in rebuild tracker for a subtree.
+///
+/// Wrap widgets you suspect are rebuilding too often:
 ///
 /// ```dart
 /// GuardianWatch(
@@ -11,14 +13,21 @@ import '../guardian.dart';
 ///   child: ProductCard(...),
 /// )
 /// ```
+///
+/// Rebuild counts appear in `report.json` / the HTML **Widget Rebuilds** table
+/// and can trigger recommendations when counts are high.
 class GuardianWatch extends StatefulWidget {
+  /// Creates a rebuild-watched wrapper.
   const GuardianWatch({
     super.key,
     required this.name,
     required this.child,
   });
 
+  /// Label used in reports (keep stable and human-readable).
   final String name;
+
+  /// The widget subtree to track.
   final Widget child;
 
   @override
@@ -30,7 +39,6 @@ class _GuardianWatchState extends State<GuardianWatch> {
   Widget build(BuildContext context) {
     final sw = Stopwatch()..start();
     final child = widget.child;
-    // Defer recording until after this frame's build completes.
     SchedulerBinding.instance.addPostFrameCallback((_) {
       sw.stop();
       Guardian.recordWidgetRebuild(

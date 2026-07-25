@@ -1,5 +1,5 @@
 name: guardian_example
-description: Example app for flutter_guardian
+description: Example app for flutter_health_guard
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_guardian:
+  flutter_health_guard:
     path: ../
   cupertino_icons: ^1.0.8
   http: ^1.2.2

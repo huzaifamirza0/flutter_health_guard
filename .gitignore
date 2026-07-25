@@ -30,6 +30,7 @@ migrate_working_dir/
 .flutter-plugins-dependencies
 build/
 
-# Guardian report output
-.flutter_guardian/
-**/.flutter_guardian/
+# Generated Guardian reports (from running apps/examples)
+.flutter_health_guard/
+example/flutter_health_guard/
+**/guardian_reports/
